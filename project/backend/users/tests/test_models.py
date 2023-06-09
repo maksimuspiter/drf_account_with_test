@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from users.models import Account
 
 
 class CreateUserTest(TestCase):
@@ -24,3 +25,19 @@ class CreateUserTest(TestCase):
     def test_wrong_pssword(self):
         user = authenticate(username="test", password="wrong")
         self.assertFalse(user is not None and user.is_authenticated)
+
+
+class CreateAccountTest(TestCase):
+    def test_create_account(self):
+        account = Account.objects.create_account(username="test_user1", password="test")
+        account.save()
+
+        user = User.objects.get(username="test_user1")
+        self.assertTrue(user is not None and user.account == account)
+        self.assertTrue(account.nickname == None)
+
+        account2 = Account.objects.create_account(
+            username="test@example.com", password="test", nickname="testNickname"
+        )
+        account2.save()
+        self.assertTrue(account2.nickname == "testNickname")
