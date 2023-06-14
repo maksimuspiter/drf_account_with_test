@@ -1,3 +1,24 @@
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+from rest_framework.permissions import IsAdminUser
+from .serializers import AccountSerializer, CreateAccountSerializer, UserSerializer
+from .models import Account
 
-# Create your views here.
+
+class AccountForUserViewSet(viewsets.ModelViewSet):
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+    permission_classes = [IsAdminUser]
+
+    def get_serializer_class(self):
+        if self.action in ["create"] and self.request.user.is_superuser:
+            return CreateAccountSerializer
+        return self.serializer_class
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [
+        IsAdminUser,
+    ]

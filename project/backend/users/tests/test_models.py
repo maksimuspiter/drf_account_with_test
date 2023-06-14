@@ -5,14 +5,12 @@ from users.models import Account
 
 
 class CreateUserTest(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user(
+    @classmethod
+    def setUpTestData(cls):
+        user = User.objects.create_user(
             username="test", password="12test12", email="test@example.com"
         )
-        self.user.save()
-
-    def tearDown(self):
-        self.user.delete()
+        user.save()
 
     def test_correct(self):
         user = authenticate(username="test", password="12test12")
@@ -34,7 +32,7 @@ class CreateAccountTest(TestCase):
 
         user = User.objects.get(username="test_user1")
         self.assertTrue(user is not None and user.account == account)
-        self.assertTrue(account.nickname == None)
+        self.assertEqual(account.nickname, None)
 
         account2 = Account.objects.create_account(
             username="test@example.com", password="test", nickname="testNickname"
