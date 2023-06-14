@@ -1,14 +1,11 @@
-import os
 from pathlib import Path
 from environs import Env
 
 env = Env()
 env.read_env()
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env("DJANGO_SECRET_KEY", default="DJANGO_SECRET_KEY")
-
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
