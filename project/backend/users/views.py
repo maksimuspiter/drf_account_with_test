@@ -1,13 +1,13 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
-from .serializers import AccountSerializer, CreateAccountSerializer, UserSerializer
+from .serializers import AccountFullSerializer, CreateAccountSerializer, UserSerializer
 from .models import Account
 
 
 class AccountForUserViewSet(viewsets.ModelViewSet):
     queryset = Account.objects.all()
-    serializer_class = AccountSerializer
+    serializer_class = AccountFullSerializer
     permission_classes = [IsAdminUser]
 
     def get_serializer_class(self):

@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["id", "username"]
 
 
-class AccountSerializer(serializers.ModelSerializer):
+class AccountFullSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
 
     class Meta:
