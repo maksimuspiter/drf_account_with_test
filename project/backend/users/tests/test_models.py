@@ -1,7 +1,8 @@
 from django.test import TestCase
+from django.db import transaction
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from users.models import Account
+from users.models import Account, AlreadyExist
 
 
 class CreateUserTest(TestCase):
@@ -39,3 +40,13 @@ class CreateAccountTest(TestCase):
         )
         account2.save()
         self.assertTrue(account2.nickname == "testNickname")
+
+        with transaction.atomic():
+            try:
+                Account.objects.create_account(
+                    username="test@example.com",
+                    password="test",
+                    nickname="testNickname",
+                )
+            except AlreadyExist as exception:
+                self.assertEqual(exception.message, "Такой пользователь уже существует")
