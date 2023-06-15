@@ -54,8 +54,10 @@ class CreateAccountSerializer(serializers.ModelSerializer):
         related_fields = ["user"]
 
     def create(self, validated_data, format="json"):
-        username = self.validated_data["user"]["username"]
-        password = self.validated_data["user"]["password"]
+        username = self.validated_data["user"].get("username")
+        password = self.validated_data["user"].get("password")
+        if not username or not password:
+            raise ValueError
         nickname = self.validated_data["nickname"]
         account = Account.objects.create_account(
             username=username, password=password, nickname=nickname

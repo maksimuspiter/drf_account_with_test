@@ -41,7 +41,15 @@ class AccountViewSet(viewsets.ModelViewSet):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         except AlreadyExist as exception:
             return Response(
-                {"created": None, "error": exception.message},
+                {"created": False, "error": exception.message},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        except ValueError:
+            return Response(
+                {
+                    "created": False,
+                    "error": "Имя пользователя и пароль обязательные поля",
+                },
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
