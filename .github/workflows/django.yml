@@ -26,7 +26,9 @@ jobs:
           pip install -r project/backend/requirements.txt
       - name: Run Tests
         run: |
-          python project/backend/manage.py test
+          cd project
+          cd backend
+          python manage.py test
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
