@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,18 +14,49 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Account',
+            name="Account",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nickname', models.CharField(blank=True, max_length=255, null=True, verbose_name='Ник')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
-                ('birthday', models.DateTimeField(blank=True, null=True, verbose_name='День рождения')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='account', to=settings.AUTH_USER_MODEL, verbose_name='пользователь')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "nickname",
+                    models.CharField(
+                        blank=True, max_length=255, null=True, verbose_name="Ник"
+                    ),
+                ),
+                (
+                    "created",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Дата создания"
+                    ),
+                ),
+                (
+                    "birthday",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="День рождения"
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="account",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="пользователь",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Аккаунт',
-                'verbose_name_plural': 'Аккаунты',
-                'ordering': ['-created'],
+                "verbose_name": "Аккаунт",
+                "verbose_name_plural": "Аккаунты",
+                "ordering": ["-created"],
             },
         ),
     ]

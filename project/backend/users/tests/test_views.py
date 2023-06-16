@@ -165,7 +165,7 @@ class AccountForSimpleUserTest(APITestCase):
             self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
             self.assertEqual(
                 response.json(),
-                {"created": None, "error": "Такой пользователь уже существует"},
+                {"created": False, "error": "Такой пользователь уже существует"},
             )
         user = User.objects.get(username="test_user_created1")
 
