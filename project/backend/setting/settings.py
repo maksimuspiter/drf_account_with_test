@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "users",
+    "shop",
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
