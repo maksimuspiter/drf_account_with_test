@@ -2,3 +2,6 @@
 
 #### Backend: Django, DRF
 [![Build Status](https://github.com/maksimuspiter/drf_with_test/actions/workflows/django.yml/badge.svg)](https://github.com/maksimuspiter/drf_with_test/actions/workflows/django.yml)
+
+##### Coverage:
+coverage run manage.py test && coverage report && coverage html
