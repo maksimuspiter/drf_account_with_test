@@ -30,6 +30,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:80",
     "http://127.0.0.1:80",
 ]
+# CSRF_TRUSTED_ORIGINS = ["https://ca01-5-144-119-237.ngrok-free.app"]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
