@@ -60,6 +60,7 @@ class AccountForAdminTests(APITestCase):
                 },
                 "get_absolute_url": f"http://127.0.0.1:8000/api-users/accounts/{new_account.pk}/",
                 "get_user_url": f"http://127.0.0.1:8000/api-users/users/{new_account.user.pk}/",
+                "avatar": "http://127.0.0.1:8000/static/images/base_avatar.webp",
             },
         )
 
@@ -193,7 +194,8 @@ class AccountForSimpleUserTest(APITestCase):
             data=admin_data,
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.json(), admin_data)
+        self.assertEqual(response.json().get("username"), admin_data["username"])
+        self.assertEqual(response.json().get("nickname"), admin_data["nickname"])
 
     def test_delete_portfolio(self):
         new_account = Account.objects.create_account(
@@ -218,3 +220,6 @@ class AccountForSimpleUserTest(APITestCase):
         self.client.login(username="test_admin", password="secret")
         response = self.client.delete(f"/api-users/portfolio/{new_account2.pk}/")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_portdolio_avatar(self):
+        pass

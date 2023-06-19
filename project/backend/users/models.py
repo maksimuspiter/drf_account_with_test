@@ -36,6 +36,7 @@ class Account(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     birthday = models.DateTimeField(null=True, blank=True, verbose_name="День рождения")
 
+    avatar = models.ImageField(upload_to="uploads/avatar/", blank=True, null=True)
     objects = AccountManager()
 
     class Meta:
@@ -55,3 +56,8 @@ class Account(models.Model):
         return "http://127.0.0.1:8000" + reverse_lazy(
             "users:users-detail", kwargs={"pk": self.user.pk}
         )
+
+    def get_avatar(self):
+        if self.avatar:
+            return "http://127.0.0.1:8000" + self.avatar.url
+        return "http://127.0.0.1:8000/static/images/base_avatar.webp"

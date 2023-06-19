@@ -29,7 +29,6 @@ class CreateUserTest(TestCase):
 class CreateAccountTest(TestCase):
     def test_create_account(self):
         account = Account.objects.create_account(username="test_user1", password="test")
-        account.save()
 
         user = User.objects.get(username="test_user1")
         self.assertTrue(user is not None and user.account == account)
@@ -50,3 +49,11 @@ class CreateAccountTest(TestCase):
                 )
             except AlreadyExist as exception:
                 self.assertEqual(exception.message, "Такой пользователь уже существует")
+
+    def test_account_avatar(self):
+        account = Account.objects.create_account(
+            username="test_user2", password="secret"
+        )
+        self.assertEqual(
+            account.get_avatar(), "http://127.0.0.1:8000/static/images/base_avatar.webp"
+        )
