@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "users",
     "shop",
+    "cart",
 ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",

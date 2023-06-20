@@ -44,6 +44,9 @@ class Product(models.Model):
             return "http://127.0.0.1:8000" + self.image.url
         return "http://127.0.0.1:8000/static/images/base_product.webp"
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class Category(models.Model):
     title = models.CharField(
